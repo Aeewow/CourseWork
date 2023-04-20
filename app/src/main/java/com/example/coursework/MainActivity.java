@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent registerActivity = new Intent(MainActivity.this, RegisterActivity.class);
+                Intent registerActivity = new Intent(MainActivity.this, Home_activity.class);
                 startActivity(registerActivity);
             }
         });
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                    Intent userProfileActivity = new Intent(MainActivity.this, UserProfileActivity.class);
+                    Intent userProfileActivity = new Intent(MainActivity.this, Home_activity.class);
                     startActivity(userProfileActivity);
                 }else {
                     try {

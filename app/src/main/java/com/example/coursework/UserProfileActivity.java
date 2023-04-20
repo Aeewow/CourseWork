@@ -92,7 +92,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private void findViews() {
         textViewWelcome = findViewById(R.id.textView_show_welcome);
-        textViewName = findViewById(R.id.textView_app_name);
+        textViewName = findViewById(R.id.textView_show_name);
         textViewEmail = findViewById(R.id.textView_show_email);
         textViewRegisterDate = findViewById(R.id.textView_show_register_date);
         progressBar = findViewById(R.id.progressBar);

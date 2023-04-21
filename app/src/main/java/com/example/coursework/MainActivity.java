@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent registerActivity = new Intent(MainActivity.this, Home_activity.class);
+                Intent registerActivity = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(registerActivity);
             }
         });

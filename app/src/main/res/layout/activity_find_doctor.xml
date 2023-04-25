@@ -151,7 +151,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="70dp"
-                    android:src="@drawable/dietician"/>
+                    android:src="@drawable/surgeon"/>
 
                 <TextView
                     android:layout_width="wrap_content"

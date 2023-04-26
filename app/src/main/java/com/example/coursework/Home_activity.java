@@ -1,17 +1,11 @@
 package com.example.coursework;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 public class Home_activity extends AppCompatActivity {
 
@@ -31,5 +25,16 @@ public class Home_activity extends AppCompatActivity {
                 startActivity(findDoctor);
             }
         });
+
+        CardView labTest = findViewById(R.id.cardLabTest);
+        labTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent labTest = new Intent(Home_activity.this, LabTestActivity.class);
+                startActivity(labTest);
+            }
+        });
+
+
     }
 }

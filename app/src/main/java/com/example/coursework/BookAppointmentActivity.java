@@ -1,8 +1,5 @@
 package com.example.coursework;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -14,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Calendar;
 
 public class BookAppointmentActivity extends AppCompatActivity {
@@ -21,7 +20,7 @@ public class BookAppointmentActivity extends AppCompatActivity {
     TextView tv;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
-    private Button dateButton, timeButton;
+    private Button dateButton, timeButton, btnRegister,btnBAck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +34,8 @@ public class BookAppointmentActivity extends AppCompatActivity {
         ed4 = findViewById(R.id.texFees);
         dateButton = findViewById(R.id.buttonAppDate);
         timeButton = findViewById(R.id.buttonAppTime);
+        btnRegister = findViewById(R.id.button_register);
+        btnBAck = findViewById(R.id.button_back);
 
         ed1.setKeyListener(null);
         ed2.setKeyListener(null);
@@ -71,6 +72,20 @@ public class BookAppointmentActivity extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
+
+        btnBAck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BookAppointmentActivity.this, FindDoctorActivity.class));
+            }
+        });
+
+        btnBAck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void initDatePicker(){
@@ -87,7 +102,7 @@ public class BookAppointmentActivity extends AppCompatActivity {
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
         //int style = AlertDialog.THEME_HOLO_DARK;
-        datePickerDialog = new DatePickerDialog(this, dateSetListener,year,month,day);
+        datePickerDialog = new DatePickerDialog(this,dateSetListener,year,month,day);
         datePickerDialog.getDatePicker().setMinDate(cal.getTimeInMillis()+86);
     }
 

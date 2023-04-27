@@ -3,6 +3,7 @@ package com.example.coursework;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -53,6 +54,7 @@ public class LabTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lab_test);
+        getSupportActionBar().hide();
 
         btnGotoCart = findViewById(R.id.buttonLTGoToCart);
         btnBack = findViewById(R.id.buttonLTBack);
@@ -84,5 +86,15 @@ public class LabTestActivity extends AppCompatActivity {
         );
         listView.setAdapter(sa);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                 Intent it = new Intent(LabTestActivity.this, LabTestDetailsActivity.class);
+                 it.putExtra("text1",packeges[i][0]);
+                 it.putExtra("text2",packege_details[i]);
+                 it.putExtra("text3",packeges[i][4]);
+                 startActivity(it);
+            }
+        });
     }
 }

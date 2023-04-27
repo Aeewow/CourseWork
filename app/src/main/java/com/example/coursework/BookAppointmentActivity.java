@@ -26,7 +26,7 @@ public class BookAppointmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_appointment);
-
+        getSupportActionBar().hide();
         tv = findViewById(R.id.Title);
         ed1 = findViewById(R.id.textFillName);
         ed2 = findViewById(R.id.textAddress);
@@ -80,7 +80,7 @@ public class BookAppointmentActivity extends AppCompatActivity {
             }
         });
 
-        btnBAck.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

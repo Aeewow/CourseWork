@@ -1,11 +1,11 @@
 package com.example.coursework;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 public class FindDoctorActivity extends AppCompatActivity {
 
@@ -13,7 +13,7 @@ public class FindDoctorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_doctor);
-
+        getSupportActionBar().hide();
         CardView exit = findViewById(R.id.cardFDbaCK);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override

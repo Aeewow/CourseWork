@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
 
                         //Open UserProfileActivity after user is created
-                        Intent userProfileActivity = new Intent(RegisterActivity.this, UserProfileActivity.class);
+                        Intent userProfileActivity = new Intent(RegisterActivity.this, Home_activity.class);
 
                         //Stop user from going back to Register Activity on pressing back button
                         userProfileActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

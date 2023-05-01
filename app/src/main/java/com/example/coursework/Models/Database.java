@@ -23,7 +23,7 @@ public class Database extends SQLiteOpenHelper {
         String qry1 = "create table cart(username text, product text, price float, otype text)";
         sqLiteDatabase.execSQL(qry1);
 
-        String qry2 = "create table orderplace(username text, fuulname text, address text, contactno text, pincode int, date text, time text, amount float, otype text)";
+        String qry2 = "create table orderplace(username text, name text, address text, contact text, pincode int, date text, time text, amount float, otype text)";
         sqLiteDatabase.execSQL(qry2);
 
         String qry3 = "create table users(username text, email text, password text)";
@@ -56,6 +56,7 @@ public class Database extends SQLiteOpenHelper {
         if (c.moveToFirst()){
             result = 1;
         }
+        c.close();
         return result;
     }
 
@@ -113,7 +114,7 @@ public class Database extends SQLiteOpenHelper {
     public void addOrder(String username, String fullname, String address, String contact, int pincode, String date, String time, float price, String otype){
         ContentValues cv = new ContentValues();
         cv.put("username", username);
-        cv.put("fullname", fullname);
+        cv.put("name", fullname);
         cv.put("address", address);
         cv.put("contact", contact);
         cv.put("pincode", pincode);

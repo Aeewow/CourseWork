@@ -20,7 +20,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
 
     private String[][] order_details = {};
-    HashMap<String, String> item;
+    HashMap<String,String> item;
     ArrayList list;
     SimpleAdapter sa;
     ListView lst;
@@ -47,8 +47,8 @@ public class OrderDetailsActivity extends AppCompatActivity {
         String username = sharedPreferences.getString("username", "").toString();
         ArrayList dbData = db.getOrderData(username);
 
-        String[][] order_details = new String[dbData.size()][];
-        for (int i = 0; i< order_details.length; i++){
+        order_details = new String[dbData.size()][];
+        for (int i = 0; i < order_details.length; i++){
             order_details[i] = new String[5];
             String arrData = dbData.get(i).toString();
             String[] strData = arrData.split(java.util.regex.Pattern.quote("$"));
@@ -63,8 +63,9 @@ public class OrderDetailsActivity extends AppCompatActivity {
             order_details[i][4] = strData[7];
         }
 
+
         list = new ArrayList();
-        for (int i = 0; i< order_details.length; i++){
+        for (int i = 0; i<order_details.length; i++){
             item = new HashMap<String, String>();
             item.put("line1", order_details[i][0]);
             item.put("line2", order_details[i][1]);

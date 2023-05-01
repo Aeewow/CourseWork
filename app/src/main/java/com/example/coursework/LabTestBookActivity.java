@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coursework.Models.Database;
 
-public class LabTestBookActivity extends AppCompatActivity {
+public class  LabTestBookActivity extends AppCompatActivity {
     EditText edname,edaddress,edcontact,edpincode;
     Button btnBooking;
 

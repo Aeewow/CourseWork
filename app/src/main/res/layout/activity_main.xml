@@ -73,10 +73,10 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/border"
-                android:hint="Email"
+                android:hint="Name"
                 android:textColor="@color/black"
                 android:textColorHint="#707070"
-                android:inputType="textEmailAddress"
+                android:inputType="textPersonName"
                 android:minHeight="48dp"
                 android:padding="6dp" />
 
@@ -119,16 +119,6 @@
                 android:textAlignment="center"
                 android:layout_marginBottom="20dp"
                 android:textColor="@color/dark_blue"/>
-
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                style="?android:attr/progressBarStyleLarge"
-                android:elevation="10dp"
-                android:visibility="gone"/>
 
         </RelativeLayout>
 

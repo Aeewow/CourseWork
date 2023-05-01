@@ -1,126 +1,83 @@
 package com.example.coursework;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.coursework.Models.Database;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText editTextLoginEmail, editTextLoginPwd;
-    private ProgressBar progressBar;
-    private FirebaseAuth auth;
+    EditText edUsername, edPassword;
+    Button btn;
+    TextView tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().hide();
-        
-        getSupportActionBar().setTitle("Login");
 
-        editTextLoginEmail = findViewById(R.id.editText_login_email);
-        editTextLoginPwd = findViewById(R.id.editText_login_pwd);
-        progressBar = findViewById(R.id.progressBar);
-
-        showHidePassword();
-
-        //Register User
-        TextView textViewRegister = findViewById(R.id.textView_link_register);
-        textViewRegister.setOnClickListener(new View.OnClickListener() {
+        edUsername = findViewById(R.id.editText_login_email);
+        edPassword = findViewById(R.id.editText_login_pwd);
+        btn = findViewById(R.id.button_login);
+        tv = findViewById(R.id.textView_link_register);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent registerActivity = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(registerActivity);
-            }
-        });
-        auth = FirebaseAuth.getInstance();
-        //Login User
-        Button buttonLogin = findViewById(R.id.button_login);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String textEmail = editTextLoginEmail.getText().toString();
-                String textPassword = editTextLoginPwd.getText().toString();
-
-                //Check if all the data are present before signing in user
-
-                if (TextUtils.isEmpty(textEmail)){
-                    Toast.makeText(MainActivity.this, "Please enter your name", Toast.LENGTH_SHORT).show();
-                    editTextLoginEmail.setError("Name is required");
-                    editTextLoginEmail.requestFocus();
-                }else if(TextUtils.isEmpty(textEmail)){
-                    Toast.makeText(MainActivity.this, "Please enter your email", Toast.LENGTH_SHORT).show();
-                    editTextLoginEmail.setError("Name is required");
-                    editTextLoginEmail.requestFocus();
-                } else if (!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()) {
-                    Toast.makeText(MainActivity.this, "Please re-enter", Toast.LENGTH_SHORT).show();
-                    editTextLoginEmail.setError("Valid email is required");
-                    editTextLoginEmail.requestFocus();
-                } else if (TextUtils.isEmpty(textPassword)) {
-                    Toast.makeText(MainActivity.this, "Please enter your password", Toast.LENGTH_SHORT).show();
-                    editTextLoginPwd.setError("Password is required");
-                    editTextLoginPwd.requestFocus();
+                String username = edUsername.getText().toString();
+                String password = edPassword.getText().toString();
+                Database db = new Database(getApplicationContext(), "healthcare", null, 1);
+                if (username.length()==0 || password.length()==0){
+                    Toast.makeText(getApplicationContext(), "Please fill all details", Toast.LENGTH_SHORT).show();
                 }else {
-                    progressBar.setVisibility(View.VISIBLE);
-                    loginUser(textEmail,textPassword);
-                }
-            }
-        });
-    }
-
-    private void loginUser(String textEmail, String textPassword) {
-        auth.signInWithEmailAndPassword(textEmail, textPassword).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                    Intent userProfileActivity = new Intent(MainActivity.this, Home_activity.class);
-                    startActivity(userProfileActivity);
-                }else {
-                    try {
-                        throw task.getException();
-                    }catch (Exception e){
-                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    if(db.login(username,password)==1){
+                        Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
+                        SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", username);
+                        editor.apply();
+                        startActivity(new Intent(MainActivity.this, Home_activity.class));
+                    }else {
+                        Toast.makeText(getApplicationContext(), "Invalid Username and Password", Toast.LENGTH_SHORT).show();
                     }
                 }
-                progressBar.setVisibility(View.GONE);
             }
         });
-    }
 
-    private void showHidePassword() {
-        ImageView imageViewShowHidePwd = findViewById(R.id.imageView_show_hide_pwd);
-        imageViewShowHidePwd.setImageResource(R.drawable.ic_show_pwd);
-
-        imageViewShowHidePwd.setOnClickListener(new View.OnClickListener(){
+        tv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                if (editTextLoginPwd.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
-                    editTextLoginPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    imageViewShowHidePwd.setImageResource(R.drawable.ic_show_pwd);
-                }else {
-                    editTextLoginPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    imageViewShowHidePwd.setImageResource(R.drawable.ic_hide_pwd);
-                }
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
             }
         });
+
+
+        /*private void showHidePassword () {
+            ImageView imageViewShowHidePwd = findViewById(R.id.imageView_show_hide_pwd);
+            imageViewShowHidePwd.setImageResource(R.drawable.ic_show_pwd);
+
+            imageViewShowHidePwd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (editTextLoginPwd.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())) {
+                        editTextLoginPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        imageViewShowHidePwd.setImageResource(R.drawable.ic_show_pwd);
+                    } else {
+                        editTextLoginPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        imageViewShowHidePwd.setImageResource(R.drawable.ic_hide_pwd);
+                    }
+                }
+            });
+        }*/
     }
 }

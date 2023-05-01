@@ -2,118 +2,92 @@ package com.example.coursework;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
+import com.example.coursework.Models.Database;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText editTextRegisterEmail, editTextRegisterPwd,editTextRegisterName;
-    private ProgressBar progressBar;
-    private FirebaseAuth auth;
+    EditText edUsername, edEmail, edPassword,edConfirm;
+    Button btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        edEmail = findViewById(R.id.editText_register_email);
+        edPassword = findViewById(R.id.editText_register_pwd2);
+        edUsername = findViewById(R.id.editText_register_name);
+        edConfirm = findViewById(R.id.editText_confirm_password);
+        btn = findViewById(R.id.button_register);
 
-        getSupportActionBar().hide();
-        findViews();
-        showHidePwd();
 
-        Button ButtonRegister = findViewById(R.id.button_register);
-        ButtonRegister.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String textEmail = editTextRegisterEmail.getText().toString();
-                String textPassword = editTextRegisterPwd.getText().toString();
-                String textName = editTextRegisterName.getText().toString();
-
+                String email = edEmail.getText().toString();
+                String password = edPassword.getText().toString();
+                String username = edUsername.getText().toString();
+                String confirm = edConfirm.getText().toString();
+                Database db = new Database(getApplicationContext(), "healthcare", null, 1);
                 //Check if all the data are present before registering user
 
-                if (TextUtils.isEmpty(textName)){
-                    Toast.makeText(RegisterActivity.this, "Please enter your name", Toast.LENGTH_SHORT).show();
-                    editTextRegisterName.setError("Name is required");
-                    editTextRegisterName.requestFocus();
-                }else if(TextUtils.isEmpty(textEmail)){
-                    Toast.makeText(RegisterActivity.this, "Please enter your email", Toast.LENGTH_SHORT).show();
-                    editTextRegisterEmail.setError("Name is required");
-                    editTextRegisterEmail.requestFocus();
-                } else if (!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()) {
-                    Toast.makeText(RegisterActivity.this, "Please re-enter", Toast.LENGTH_SHORT).show();
-                    editTextRegisterEmail.setError("Valid email is required");
-                    editTextRegisterEmail.requestFocus();
-                } else if (TextUtils.isEmpty(textPassword)) {
-                    Toast.makeText(RegisterActivity.this, "Please enter your password", Toast.LENGTH_SHORT).show();
-                    editTextRegisterPwd.setError("Password is required");
-                    editTextRegisterPwd.requestFocus();
-                }else if (textPassword.length() < 6) {
-                    Toast.makeText(RegisterActivity.this, "Password too short!", Toast.LENGTH_SHORT).show();
-                    editTextRegisterPwd.setError("Password should be at least 6 digits");
-                    editTextRegisterPwd.requestFocus();
-                }else {
-                    progressBar.setVisibility(View.VISIBLE);
-                    registerUser(textEmail,textName,textPassword);
+                if (username.length()==0||email.length()==0||password.length()==0||confirm.length()==0){
+                    Toast.makeText(getApplicationContext(), "Please fill all details", Toast.LENGTH_SHORT).show();
                 }
-
-            }
-        });
-    }
-
-    private void registerUser(String textEmail, String textName, String textPassword) {
-        auth = FirebaseAuth.getInstance();
-        auth.createUserWithEmailAndPassword(textEmail,textPassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                //Check if the user creation was successful
-                if (task.isSuccessful()){
-                    FirebaseUser firebaseUser = auth.getCurrentUser();
-
-                    if(firebaseUser != null){
-                        //Update Display name of the user
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(textName).build();
-                        firebaseUser.updateProfile(profileUpdates);
-                        Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-
-                        //Open UserProfileActivity after user is created
-                        Intent userProfileActivity = new Intent(RegisterActivity.this, Home_activity.class);
-
-                        //Stop user from going back to Register Activity on pressing back button
-                        userProfileActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(userProfileActivity);
-                        finish();
+                else {
+                    if (password.compareTo(confirm)==0){
+                        if (isValid(password)){
+                            db.register(username,email,password);
+                            Toast.makeText(getApplicationContext(), "Record Inserted", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                        }else {
+                            Toast.makeText(getApplicationContext(), "Password must contain at least 8 characters", Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        Toast.makeText(getApplicationContext(), "Password and Confirm password didn't match", Toast.LENGTH_SHORT).show();
                     }
-                }else{
-                    // Handle exceptions
-                    try {
-                        throw task.getException();
-                    }catch (Exception e){
-                        Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                    progressBar.setVisibility(View.GONE);
                 }
             }
         });
     }
+    public static boolean isValid(String passwordHere){
+        int f1 = 0,f2=0,f3=0;
+        if (passwordHere.length()<8){
+            return false;
+        }else {
+            for (int p = 0;p<passwordHere.length(); p++){
+                if (Character.isLetter(passwordHere.charAt(p))){
+                    f1 = 1;
+                }
+            }
+            for (int r = 0; r < passwordHere.length();r++){
+                if (Character.isDigit(passwordHere.charAt(r))){
+                    f2 = 1;
+                }
+            }
+            for (int s=0; s < passwordHere.length();s++){
+                char c = passwordHere.charAt(s);
+                if (c>=33&&c<=46||c==64){
+                    f3 = 1;
+                }
+            }
+            if(f1==1 && f2==1 && f3==1)
+                return true;
+            return false;
+        }
+    }
 
-    private void showHidePwd() {
+
+
+
+    /*private void showHidePwd() {
         ImageView imageViewShowHidePwd = findViewById(R.id.imageView_show_hide_pwd);
         imageViewShowHidePwd.setImageResource(R.drawable.ic_show_pwd);
 
@@ -136,5 +110,5 @@ public class RegisterActivity extends AppCompatActivity {
         editTextRegisterPwd = findViewById(R.id.editText_register_pwd);
         editTextRegisterName = findViewById(R.id.editText_register_name);
         progressBar = findViewById(R.id.progressBar);
-    }
+    }*/
 }

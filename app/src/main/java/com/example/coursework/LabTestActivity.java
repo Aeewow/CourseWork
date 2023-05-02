@@ -17,32 +17,30 @@ public class LabTestActivity extends AppCompatActivity {
 
     private String [][] packeges=
             {
-                    {"Packege 1 : Full Body Checkup","","","","999"},
-                    {"Packege 2 : Blood Glucose Fasting","","","","299"},
-                    {"Packege 3 : Covid-19 Antibody - IgG","","","","899"},
-                    {"Packege 4 : Thyroid Check","","","","499"},
-                    {"Packege 5 : Immunity Check","","","","699"}
+                    {"Packege 1 : Полная проверка тела","","","","999"},
+                    {"Packege 2 : Уровень глюкозы в крови","","","","299"},
+                    {"Packege 3 : Антитела к Covid-19 - IgG","","","","899"},
+                    {"Packege 4 : Проверка щитовидной железы","","","","499"},
+                    {"Packege 5 : Тест иммунной системы","","","","699"}
             };
 
     private String[] packege_details = {
-            "Blood Glucose Fasting\n" +
-                    "Complete Hemogram\n" +
-                    "HbA1c\n"+
-                    "Iron Studies\n"+
-                    "Kidney Function Test\n"+
-                    "LDH Lactate Dehydrogenase, Serum\n"+
-                    "Lipid Profile\n"+
-                    "Liver Function Test",
-            "Blood Glucose Fasting",
-            "COVID-19 Antibody - IgG",
-            "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive",
-            "Complete Hemogram\n"+
-                    "CRP (C Reactive Protein) Quantitative, Serum\n"+
-                    "Iron Studies\n"+
-                    "Kidney Function Test\n"+
-                    "Vitamin D Total-25 Hydroxy\n"+
-                    "Liver Function Test\n"+
-                    "Lipid Profile"
+            "Уровень глюкозы в крови\n" +
+                    "Полная гемограмма\n" +
+                    "Исследования железа\n"+
+                    "Тест на функцию почек\n"+
+                    "ЛДГ-лактатдегидрогеназа,\n"+
+                    "Липидный профиль\n"+
+                    "Функциональный тест печени",
+            "Уровень глюкозы в крови",
+            "COVID-19 Антитела - IgG",
+            "Профиль щитовидной железы -общий (Т3, Т4 и ТТГ сверхчувствительный",
+            "Полная гемограмма\n"+
+                    "Исследования железа\n"+
+                    "Тест на функцию почек\n"+
+                    "D-25 гидроксивитаминов\n"+
+                    "Функциональный тест печени\n"+
+                    "Липидный профиль"
     };
     HashMap<String,String> item;
     ArrayList list;

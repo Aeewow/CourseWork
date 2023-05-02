@@ -17,35 +17,35 @@ public class BuyMedicineActivity extends AppCompatActivity {
 
     private String[][] packages =
             {
-                    {"Uprice-D3 1000UI Capsul", "", "", "", "50"},
-                    {"HealthVit Chromium Picolinate 200mcg Capsule", "", "","","305"},
-                    {"Vitamin B Complex Capsule", "","","","448"},
-                    {"Inlife Vitamin E Wheat Germ Oil Capsule", "","","", "539"},
-                    {"Dolo 650 Tablet", "", "", "", "30"},
-                    {"Crocin 650 Advance Tablet", "","","","50"},
-                    {"Streepsils Medicate Lozenges for Sore Throat", "","","","40"},
-                    {"Tata 1mg Calcium + Vitamin D3", "","","","30"},
-                    {"Feronia -XT Tablet", "","","","130"},
+                    {"Трекрезан 250 мг", "", "", "", "300"},
+                    {"Аспирин", "", "","","305"},
+                    {"Капсула с комплексом витаминов группы D", "","","","448"},
+                    {"Капсула с комплексом витаминов группы E", "","","", "539"},
+                    {"Нурофен", "", "", "", "400"},
+                    {"Ибуклин", "","","","240"},
+                    {"Стрепсилс - лекарственные пастилки от боли в горле", "","","","300"},
+                    {"Снуп", "","","","200"},
+                    {"Смекта", "","","","345"},
             };
     private String[] package_details = {
-            "Building and keeping the bones & teeth strong\n"+
-                    "Reducing Fatique/strees and muscular pains\n"+
-                    "Boosting immunity and increasing resistance against infection",
-            "Chromium is an essentical trace mineral that plays an important role in helping insulin regulat\n",
-            "Provides relief from vitamin B deficiencies\n"+
-                    "Helps in formation of red blood cells\n"+
-                    "Mainrains healthy nervous stsrem",
-            "It promotes health as well as skin benefit\n"+
-                    "It helps reduce skin blemish and pigmentation\n"+
-                    "It act as safeguard the skin from the harsh UVA and UVB sun rays",
-            "Dolo 650 Tablet helps relieve pain and fever by blocking the release of certain chemical message\n",
-            "Helps relieve fever and bring down a high temperature\n"+
-                    "Suitable for people with a heart condition or high blood pressure",
-            "Relieves the symptoms of a bacterial throat infection and soothes the recovery process\n"+
-                    "Provides a warm and comforting feeling during sore throat",
-            "Reduses the risk of calcium deficiency, Rickets, and Osteoporosis\n"+
-                    "Promotes mobility and flexibility of joints",
-            "Helps to reduce the iron deficiency due to chronic blood loss or low intake of iron"
+            "Препарат для повышения иммунитета и профилактики простудных заболеваний\n"+
+                    "При лечении и профилактике ОРВИ\n"+
+                    "Активирует иммунитет, помогает справиться с высокими нагрузками",
+            "Лекарственное средство, оказывающее обезболивающее, жаропонижающее, противовоспалительное действие\n",
+            "Помогает организму усваивать кальций и фосфор, которые необходимы для роста костей\n"+
+                    "Выполняет защитную функцию: сокращает рост раковых клеток,\n"+
+                    "Уменьшает выраженность воспалительных процессов",
+            "Витамин Е является универсальным протектором клеточных мембран от окислительного повреждения.\n"+
+                    "Активизирует ферментативную антиоксидантную защиту\n"+
+                    "Способствует укреплению иммунозащитных сил организма",
+            "Препарат применяется для снижения темпертуры и снятия боли\n",
+            "Это комбинированный препарат, который обладает противовоспалительным, жаропонижающим и болеутоляющим эффектом.\n"+
+                    "Максимальный эффект при лечении различных видов болевых синдромов.",
+            "Препарат оказывает местное обезболивающее и противовоспалительное действие на слизистую оболочку полости рта и горла\n"+
+                    "Уменьшает отек, затруднение при глотании, боль и ощущение раздражения в горле",
+            "Назальный дозированный спрей, предназначенный для лечения и профилактики аллергических ринитов\n"+
+                    "Он содержит действующее вещество – ксилометазолин гидрохлорид, который оказывает противовоспалительный и антигистаминный эффект.",
+            "Помогает с нарушениями в работе желудочно-кишечного тракта"
     };
     HashMap<String,String> item;
     ArrayList list;

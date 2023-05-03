@@ -62,12 +62,12 @@ public class BuyMedicineActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.buttonBMBack);
         btnGoToCart = findViewById(R.id.buttonBMGoToCart);
 
-        /*btnGoToCart.setOnClickListener(new View.OnClickListener() {
+        btnGoToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(BuyMedicineActivity.this, CartBuyMedicineActivity.class));
+                startActivity(new Intent(BuyMedicineActivity.this, CartBuyMedicineActivity.class));
             }
-        });*/
+        });
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

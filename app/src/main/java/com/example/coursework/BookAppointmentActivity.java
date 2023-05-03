@@ -80,12 +80,22 @@ public class BookAppointmentActivity extends AppCompatActivity {
             }
         });
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        /*btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Database db = new Database(getApplicationContext(), "healthcare", null, 1);
+                SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
+                String username = sharedPreferences.getString("username", "").toString();
 
+                    if (db.checkAppointmentExists(username,title+"=>"+ fullname,address,dateButton.getText().toString(),timeButton.getText().toString())==1){
+                    Toast.makeText(getApplicationContext(), "Product Already Added", Toast.LENGTH_SHORT).show();
+                }else {
+                    db.addOrder(username,title+"=>"+fullname,address,0,dateButton.getText().toString(),Float.parseFloat(fees), "appointment");
+                    Toast.makeText(getApplicationContext(), "Your appointment is done successfuly", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(BookAppointmentActivity.this,Home_activity.class));
+                }
             }
-        });
+        });*/
     }
 
     private void initDatePicker(){

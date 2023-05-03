@@ -23,7 +23,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class CartLabActivity extends AppCompatActivity {
+public class CartBuyMedicineActivity extends AppCompatActivity {
+
     HashMap<String, String> item;
     ArrayList list;
     SimpleAdapter sa;
@@ -38,7 +39,7 @@ public class CartLabActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart_lab);
+        setContentView(R.layout.activity_cart_buy_medicine);
 
         dateButton = findViewById(R.id.buttonBMCartDate);
         timeButton = findViewById(R.id.buttonBMCartTime);
@@ -53,7 +54,7 @@ public class CartLabActivity extends AppCompatActivity {
         Database db = new Database(getApplicationContext(), "healthcare", null, 1);
 
         float totalAmount = 0;
-        ArrayList dbData = db.getCartDate(username, "lab");
+        ArrayList dbData = db.getCartDate(username, "medicine");
         Toast.makeText(getApplicationContext(), ""+dbData, Toast.LENGTH_LONG).show();
 
         packages = new String[dbData.size()][];
@@ -91,14 +92,14 @@ public class CartLabActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CartLabActivity.this,LabTestActivity.class));
+                startActivity(new Intent(CartBuyMedicineActivity.this,BuyMedicineActivity.class));
             }
         });
 
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(CartLabActivity.this,LabTestBookActivity.class);
+                Intent it = new Intent(CartBuyMedicineActivity.this,BuyMedicineBookActivity.class);
                 it.putExtra("price",tvTotal.getText());
                 it.putExtra("date",dateButton.getText());
                 it.putExtra("time",timeButton.getText());

@@ -13,14 +13,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coursework.Models.Database;
 
-public class  LabTestBookActivity extends AppCompatActivity {
+public class BuyMedicineBookActivity extends AppCompatActivity {
+
     EditText edname,edaddress,edcontact,edpincode;
     Button btnBooking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lab_test_book);
+        setContentView(R.layout.activity_buy_medicine_book);
 
         edname = findViewById(R.id.editTextBMB_FullName);
         edaddress = findViewById(R.id.editTextBMB_address);
@@ -40,10 +41,10 @@ public class  LabTestBookActivity extends AppCompatActivity {
                 String username = sharedPreferences.getString("username", "").toString();
 
                 Database db = new Database(getApplicationContext(), "healthcare", null, 1);
-                db.addOrder(username,edname.getText().toString(),edaddress.getText().toString(),edcontact.getText().toString(),Integer.parseInt(edpincode.getText().toString()),date.toString(),time.toString(),Float.parseFloat(price[1].toString()),"lab");
-                db.removeCart(username,"lab");
+                db.addOrder(username,edname.getText().toString(),edaddress.getText().toString(),edcontact.getText().toString(),Integer.parseInt(edpincode.getText().toString()),date.toString(),time.toString(),Float.parseFloat(price[1].toString()),"medicine");
+                db.removeCart(username,"medicine");
                 Toast.makeText(getApplicationContext(), "Your booking is done successfully", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(LabTestBookActivity.this,Home_activity.class));
+                startActivity(new Intent(BuyMedicineBookActivity.this,Home_activity.class));
             }
         });
     }
